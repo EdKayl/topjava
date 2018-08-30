@@ -29,9 +29,18 @@ function deleteRow(id) {
 }
 
 function updateTable() {
-    $.get(ajaxUrl, function (data) {
+    // alert("filter set " + $("#startDate") + " " + $("#endDate") + " " + $("#startTime") + " " + $("#endTime"));
+    /*$.get(ajaxUrl, function (data) {
         datatableApi.clear().rows.add(data).draw();
-    });
+    });*/
+    $.ajax({
+        url: ajaxUrl + "filter",
+        type: "GET",
+        data: $("#filterForm").serialize(),
+        success: function (data) {
+            datatableApi.clear().rows.add(data).draw();
+        }
+    })
 }
 
 function save() {

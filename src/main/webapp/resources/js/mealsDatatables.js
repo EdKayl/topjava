@@ -34,3 +34,21 @@ $(function () {
     });
     makeEditable();
 });
+
+function filter() {
+    var form = $("#filterForm");
+    $.ajax({
+        url: ajaxUrl + "filter",
+        type: "GET",
+        data: form.serialize(),
+        success: function (data) {
+            datatableApi.clear().rows.add(data).draw();
+        }
+    });
+}
+
+function clearFilter() {
+    $("#filterForm").find(":input").val("x");
+    updateTable();
+
+}
